@@ -1,1 +1,1 @@
-console.log('Привіт з JS');
+console.log('Hello world!!');

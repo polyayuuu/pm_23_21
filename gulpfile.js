@@ -38,13 +38,17 @@ function scripts() {
 }
 
 function images() {
-    return gulp.src(paths.images.src)
+    return gulp.src(paths.images.src, { encoding: false })
         .pipe(imagemin())
         .pipe(gulp.dest(paths.images.dest));
 }
 
 function serve() {
-    browserSync.init({ server: { baseDir: './dist' } });
+    browserSync.init({ server: { baseDir: './dist' },
+    notify: false,
+    browser: 'chrome'
+    });
+    
 }
 
 function watch() {
