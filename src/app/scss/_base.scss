@@ -1,0 +1,15 @@
+// Наслідування @extend
+%shadow-effect {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+body { 
+    background-color: #e9ecef; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.resume-wrapper {
+    max-width: 1100px;
+    border: 1px solid #dcdcdc;
+    @extend %shadow-effect; 
+}

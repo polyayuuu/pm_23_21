@@ -1,0 +1,47 @@
+// Міксін для заголовків
+@mixin section-heading {
+    border-bottom: 2px solid $border-color;
+    padding-bottom: 8px;
+    position: relative;
+    font-size: 1.5rem;
+    margin-top: $base-padding * 1.5; // Математика
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0; bottom: -2px;
+        width: 50px; height: 2px;
+        background-color: $teal-color;
+    }
+}
+
+.section-title {
+    @include section-heading;
+}
+
+// Вкладеність
+.custom-skill-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #d1e7dd;
+    position: relative;
+    margin-bottom: $base-padding / 2;
+
+    .custom-skill-fill {
+        height: 100%;
+        background-color: $teal-color;
+        position: relative;
+
+        .custom-skill-knob {
+            width: 12px;
+            height: 12px;
+            background-color: $teal-color;
+            position: absolute;
+            right: -6px;
+            top: -3.5px;
+        }
+    }
+}
+
+.bg-teal { background-color: $teal-color !important; }
+.text-teal { color: $teal-color !important; } 

@@ -1,0 +1,31 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-custom-dark { 
+    background-color: $dark-bg !important; 
+}
+
+.lang-circle {
+    width: 75px; 
+    height: 75px;
+    border-radius: 50%;
+    background: conic-gradient($teal-color calc(var(--percent) * 1%), #e0e0e0 0);
+    @include flex-center; 
+
+    .lang-inner {
+        width: 65px;
+        height: 65px;
+        background-color: $light-gray;
+        border-radius: 50%;
+        flex-direction: column;
+        @include flex-center; 
+    }
+}
+
+.hobby-box {
+    @extend %shadow-effect;
+    background-color: #fff;
+}
