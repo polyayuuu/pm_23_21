@@ -43,6 +43,16 @@ function images() {
         .pipe(gulp.dest(paths.images.dest));
 }
 
+function bootstrapCSS() {
+    return gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+        .pipe(gulp.dest('dist/css/'));
+}
+
+function bootstrapJS() {
+    return gulp.src('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+        .pipe(gulp.dest('dist/js/'));
+}
+
 function serve() {
     browserSync.init({ server: { baseDir: './dist' },
     notify: false,
@@ -58,6 +68,6 @@ function watch() {
     gulp.watch(paths.images.src, images);
 }
 
-const build = gulp.series(gulp.parallel(html, styles, scripts, images), gulp.parallel(serve, watch));
-exports.build = build;
-exports.default = build;
+const build = gulp.series(gulp.parallel(html, styles, scripts, images, bootstrapCSS, bootstrapJS), gulp.parallel(serve, watch));
+exports.build=build;
+exports.default=build;
