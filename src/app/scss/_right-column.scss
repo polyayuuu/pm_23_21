@@ -1,27 +1,59 @@
-@mixin flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.profile-line-wrapper {
+    width: 75%;             
+    height: 2px;            
+    background-color: #ffffff; 
+    margin: 15px auto 0 auto; 
+    position: relative;     
 
-.bg-custom-dark { 
-    background-color: $dark-bg !important; 
+    .profile-line-highlight {
+        width: 40%;         
+        height: 4px;        
+        background-color: $teal-color; 
+        position: absolute;
+        left: 30%;          
+        top: -1px;          
+    }
 }
 
 .lang-circle {
-    width: 75px; 
+    width: 75px;
     height: 75px;
-    border-radius: 50%;
-    background: conic-gradient($teal-color calc(var(--percent) * 1%), #e0e0e0 0);
-    @include flex-center; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .progress-ring {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotate(-90deg);
+
+        .ring-track {
+            fill: transparent;
+            stroke: #e0e0e0;
+            stroke-width: 5;
+        }
+
+        .ring-fill {
+            fill: transparent;
+            stroke: $teal-color;
+            stroke-width: 5;
+            stroke-linecap: round;
+        }
+    }
 
     .lang-inner {
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
         background-color: $light-gray;
         border-radius: 50%;
+        display: flex;
         flex-direction: column;
-        @include flex-center; 
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 2; 
     }
 }
 
