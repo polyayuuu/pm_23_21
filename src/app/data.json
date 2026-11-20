@@ -1,0 +1,28 @@
+{
+  "firstName": "Kevin",
+  "lastName": "C. Silva",
+  "title": "Graphic & Web Designer",
+  "jobs": [
+    {
+      "years": "2020 - Present",
+      "title": "Senior Web Designer",
+      "company": "Creative Agency",
+      "location": "Chicago",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    {
+      "years": "2015 - 2020",
+      "title": "Graphic Designer",
+      "company": "Creative Market",
+      "location": "United Kingdom",
+      "description": "Lorem Ipsum has been the industry's standard dummy text."
+    },
+    {
+      "years": "2013 - 2015",
+      "title": "Marketing Manager",
+      "company": "Marketing Agency",
+      "location": "United Kingdom",
+      "description": "Lorem Ipsum has been the industry's standard dummy text."
+    }
+  ]
+}

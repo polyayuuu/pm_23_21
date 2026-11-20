@@ -1,70 +1,64 @@
-// Імпортуємо функцію акордеону з нашого нового файлу
-import { initAccordion } from './accordion.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================
-    // ЗАВДАННЯ 1: Підстановка імені (textContent)
+    // 1. АКОРДЕОН (Стрілочки)
     // ==========================================
-    const nameElement = document.getElementById('personName');
-    if (nameElement) {
-        nameElement.textContent = "Kevin C. Silva";
-    }
+    const toggleHeaders = document.querySelectorAll('.toggle-header');
+    toggleHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
 
-    // ==========================================
-    // ЗАВДАННЯ 2: Викликаємо функцію з accordion.js
-    // ==========================================
-    initAccordion();
-
-    // ==========================================
-    // ЗАВДАННЯ 3: Генерація розмітки з масиву
-    // ==========================================
-    const experienceData = [
-        {
-            years: "2020 - Present",
-            title: "Senior Web Designer",
-            company: "Creative Agency",
-            location: "Chicago",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-        },
-        {
-            years: "2015 - 2020",
-            title: "Graphic Designer",
-            company: "Creative Market",
-            location: "United Kingdom",
-            description: "Lorem Ipsum has been the industry's standard dummy text."
-        },
-        {
-            years: "2013 - 2015",
-            title: "Marketing Manager",
-            company: "Marketing Agency",
-            location: "United Kingdom",
-            description: "Lorem Ipsum has been the industry's standard dummy text."
-        }
-    ];
-
-    const experienceContainer = document.getElementById('experienceContent');
-    
-    if (experienceContainer) {
-        experienceContainer.innerHTML = '';
-        
-        let htmlString = '';
-
-        experienceData.forEach(item => {
-            htmlString += `
-                <div class="row mb-4">
-                    <div class="col-sm-3">
-                        <span class="badge bg-teal text-white px-3 py-2 rounded-0">${item.years}</span>
-                    </div>
-                    <div class="col-sm-9 mt-3 mt-sm-0">
-                        <h5 class="fw-bold mb-0 text-uppercase">${item.title}</h5>
-                        <p class="text-dark fst-italic mb-1">${item.company} <span class="float-end text-teal fst-normal">${item.location}</span></p>
-                        <p class="text-muted small">${item.description}</p>
-                    </div>
-                </div>
-            `;
+            if (content && icon) {
+                content.classList.toggle('collapsed');
+                icon.classList.toggle('rotated');
+            }
         });
+    });
 
-        experienceContainer.innerHTML = htmlString;
-    }
+    // ==========================================
+    // 2. AJAX ЗАПИТ ДО JSON (ЛР №5)
+    // ==========================================
+    fetch('data.json')
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP помилка: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            // Підстановка імені
+            const nameElement = document.getElementById('personName');
+            if (nameElement) {
+                nameElement.textContent = `${data.firstName} ${data.lastName}`;
+            }
+
+            // Генерація карток досвіду
+            const experienceContainer = document.getElementById('experienceContent');
+            if (experienceContainer) {
+                experienceContainer.innerHTML = ''; 
+                let htmlString = '';
+
+                data.jobs.forEach(item => {
+                    htmlString += `
+                        <div class="row mb-4">
+                            <div class="col-sm-3">
+                                <span class="badge bg-teal text-white px-3 py-2 rounded-0">${item.years}</span>
+                            </div>
+                            <div class="col-sm-9 mt-3 mt-sm-0">
+                                <h5 class="fw-bold mb-0 text-uppercase">${item.title}</h5>
+                                <p class="text-dark fst-italic mb-1">${item.company} <span class="float-end text-teal fst-normal">${item.location}</span></p>
+                                <p class="text-muted small">${item.description}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                experienceContainer.innerHTML = htmlString;
+            }
+        })
+        .catch(error => {
+            console.error('Помилка:', error);
+            const experienceContainer = document.getElementById('experienceContent');
+            if (experienceContainer) {
+                experienceContainer.innerHTML = `<div class="alert alert-danger">Не вдалося завантажити дані.</div>`;
+            }
+        });
 });
