@@ -1,3 +1,6 @@
+// Імпортуємо функцію акордеону з нашого нового файлу
+import { initAccordion } from './accordion.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================
@@ -9,24 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // ЗАВДАННЯ 2: Стрілочки та згортання контенту
+    // ЗАВДАННЯ 2: Викликаємо функцію з accordion.js
     // ==========================================
-    const toggleHeaders = document.querySelectorAll('.toggle-header');
-
-    toggleHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            // Знаходимо контент, який йде відразу після заголовка
-            const content = header.nextElementSibling;
-            // Знаходимо стрілочку всередині заголовка
-            const icon = header.querySelector('.toggle-icon');
-
-            if (content && icon) {
-                // Перемикаємо класи
-                content.classList.toggle('collapsed');
-                icon.classList.toggle('rotated');
-            }
-        });
-    });
+    initAccordion();
 
     // ==========================================
     // ЗАВДАННЯ 3: Генерація розмітки з масиву
@@ -58,12 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const experienceContainer = document.getElementById('experienceContent');
     
     if (experienceContainer) {
-        // Очищаємо контейнер перед вставкою
         experienceContainer.innerHTML = '';
         
         let htmlString = '';
 
-        // Генеруємо HTML для кожного запису
         experienceData.forEach(item => {
             htmlString += `
                 <div class="row mb-4">
@@ -79,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 
-        // Вставляємо згенерований HTML
         experienceContainer.innerHTML = htmlString;
     }
 });
